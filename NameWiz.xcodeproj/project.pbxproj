@@ -79,23 +79,47 @@
 		0801B5C32205010200DC5DDA /* NameWiz */ = {
 			isa = PBXGroup;
 			children = (
+				08640DB1220BA447000C25D4 /* View */,
+				08640DB0220BA43F000C25D4 /* Controller */,
+				08640DAE220BA423000C25D4 /* Model */,
 				0801B5C42205010200DC5DDA /* AppDelegate.swift */,
 				0801B5C82205010200DC5DDA /* Main.storyboard */,
-				0858D137220A4B21009CC555 /* HomeCollectionVC.swift */,
-				0858D13B220A8CC7009CC555 /* HomeCollectionViewCell.swift */,
-				08C75F3622052AB300E45473 /* TabViewController.swift */,
-				08DFA7F62205F09C00F9AE47 /* EventVC.swift */,
-				08DFA7F82205F10000F9AE47 /* Contact.swift */,
-				08DFA7FA2205FFCE00F9AE47 /* EventsData.swift */,
-				0887A0E82207FF2C003B9C5C /* Event.swift */,
 				0887A0EA2207FFCC003B9C5C /* Contants.swift */,
 				0858D139220A51E2009CC555 /* Customisation.swift */,
-				0887A0EC22080633003B9C5C /* Disk.swift */,
 				0801B5CB2205010400DC5DDA /* Assets.xcassets */,
 				0801B5CD2205010400DC5DDA /* LaunchScreen.storyboard */,
 				0801B5D02205010400DC5DDA /* Info.plist */,
 			);
 			path = NameWiz;
+			sourceTree = "<group>";
+		};
+		08640DAE220BA423000C25D4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				08DFA7F82205F10000F9AE47 /* Contact.swift */,
+				08DFA7FA2205FFCE00F9AE47 /* EventsData.swift */,
+				0887A0E82207FF2C003B9C5C /* Event.swift */,
+				0887A0EC22080633003B9C5C /* Disk.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		08640DB0220BA43F000C25D4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0858D13B220A8CC7009CC555 /* HomeCollectionViewCell.swift */,
+				0858D137220A4B21009CC555 /* HomeCollectionVC.swift */,
+				08C75F3622052AB300E45473 /* TabViewController.swift */,
+				08DFA7F62205F09C00F9AE47 /* EventVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		08640DB1220BA447000C25D4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		14D2035E1140896BD67B7F92 /* Pods */ = {

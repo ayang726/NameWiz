@@ -10,11 +10,7 @@ import UIKit
 
 class HomeCollectionVC: UIViewController {
 
-    var events: [Event] {
-        get {
-            return EventsData.instance.events
-        }
-    }
+    private let eventsInstance = EventsData.instance
     @IBOutlet weak var greetingsMessage: UILabel!
     @IBOutlet weak var navBar: UINavigationBar!
     
@@ -23,6 +19,7 @@ class HomeCollectionVC: UIViewController {
     @IBOutlet weak var collectionViewLongPressOutlet: UILongPressGestureRecognizer!
     
     @IBOutlet weak var tapOutlet: UITapGestureRecognizer!
+    
     @IBAction func collectionViewCellLongPressAction(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began{
             let point = sender.location(in: collectionView)
@@ -41,8 +38,7 @@ class HomeCollectionVC: UIViewController {
     @objc func deleteEvent(_ button: UIButton) {
         let point = button.frame.origin
         if let indexPath = collectionView.indexPathForItem(at: point) {
-            EventsData.instance.events.remove(at: indexPath.row)
-            Disk.saveData()
+            let _ = EventsData.instance.removeEvent(at: indexPath.row)
             collectionView.deleteItems(at: [indexPath])
             view.removeGestureRecognizer(tapOutlet)
             deleteButton.removeFromSuperview()
@@ -54,16 +50,14 @@ class HomeCollectionVC: UIViewController {
     }
     
     @IBAction func addEventButtonAction(_ sender: UIBarButtonItem) {
-        EventsData.instance.events.append(Event("New Event"))
-        Disk.saveData()
+        EventsData.instance.addEvent()
         collectionView.reloadData()
         
         
     }
     
     @IBAction func clearDataAction(_ sender: UIBarButtonItem) {
-        EventsData.instance.events = [Event("Sample Event")]
-        Disk.saveData()
+        EventsData.instance.removeAll()
         collectionView.reloadData()
     }
     
@@ -92,12 +86,12 @@ class HomeCollectionVC: UIViewController {
 
 extension HomeCollectionVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return events.count
+        return eventsInstance.eventsCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Identifiers.CollectionViewIdentifier, for: indexPath) as! HomeCollectionViewCell
-        cell.textLabel.text = events[indexPath.row].eventTitle
+        cell.textLabel.text = eventsInstance.getEventTitle(for: indexPath.row)
         cell.textLabel.font = Customisation.Font.MarkerFelt_Thin
         cell.backgroundColor = UIColor.white
         cell.layer.cornerRadius = 2

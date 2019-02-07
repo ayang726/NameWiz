@@ -12,16 +12,12 @@ class EventVC: UIViewController {
 
     weak var TabVC: TabViewController!
     var eventID: Int!
-    var eventTitle: String {
-        get { return EventsData.instance.events[eventID].eventTitle }
-        set { EventsData.instance.events[eventID].eventTitle = newValue }
-    }
-    var contacts: [Contact]{
-        get { return EventsData.instance.events[eventID].contacts }
-        set { EventsData.instance.events[eventID].contacts = newValue }
-    }
+    lazy var eventTitle = eventsInstance.getEventTitle(for: eventID)
     
-    var navBarTitleItem: UINavigationItem?
+    private let eventsInstance = EventsData.instance
+    private var contacts: [Contact] { return eventsInstance.getContact(for: eventID)}
+    
+    private var navBarTitleItem: UINavigationItem?
     
     @IBOutlet weak var textfield: UITextField!
     
@@ -41,7 +37,7 @@ class EventVC: UIViewController {
         }
     }
     
-    lazy var titleTextField = UITextField()
+    private var titleTextField = UITextField()
     
     @IBAction func navBarLongPressAction(_ sender: UILongPressGestureRecognizer) {
         let navItem = UINavigationItem(title: "New Event Name")
@@ -58,7 +54,6 @@ class EventVC: UIViewController {
             navItem.titleView = titleTextField
             
             navBar.pushItem(navItem, animated: true)
-            print("triggered")
             titleTextField.delegate = self
             titleTextField.becomeFirstResponder()
         }
@@ -66,63 +61,39 @@ class EventVC: UIViewController {
     
     func addNewContact(_ name: String) {
         let indexOfSpace = name.lastIndex(of: " ")
-        var firstName: String
-        var lastName: String
-        var newContact: Contact
+        var firstName = ""
+        var lastName = ""
         if let index = indexOfSpace {
             firstName = String(name[..<index])
             lastName = String(name[index...].dropFirst())
-            newContact = Contact(firstName, lastName)
         } else {
           firstName = name
-            newContact = Contact(firstName)
         }
-        EventsData.instance.events[eventID].contacts.append(newContact)
-        Disk.saveData()
+        
+        eventsInstance.addContact(firstName: firstName, lastName: lastName, toEvent: eventID)
         
         tableView.reloadData()
     }
-//    
-//    static let ReloadOptionsKey = "ReloadOptions"
-//    static let EventIDKey = "EventID"
-//    enum ReloadOptions {
-//        case ReloadTabButtons
-//        case ReloadTabVCs
-//        case GotoLastVC
-//    }
-//    
+   
     func changeEventName(_ name: String) {
-        EventsData.instance.events[eventID].eventTitle = name
+        eventsInstance.setEventTitle(name, for: eventID)
         navBarTitleItem?.title = name
-        Disk.saveData()
         TabVC.reloadData()
         TabVC.scrollToPage(.at(index: eventID), animated: false)
-//        NotificationCenter.default.post(name: .ReloadTabViewController, object: self, userInfo: [EventVC.ReloadOptionsKey: [ReloadOptions.ReloadTabButtons]])
-        
     }
     
     @IBAction func addNewEventAction(_ sender: UIBarButtonItem) {
-        EventsData.instance.events.append(Event("New Event"))
-        Disk.saveData()
+        eventsInstance.addEvent()
         TabVC.loadEventVCs()
         TabVC.scrollToPage(.last, animated: true)
-//        NotificationCenter.default.post(name: .ReloadTabViewController, object: self, userInfo: [EventVC.ReloadOptionsKey: [ReloadOptions.GotoLastVC, ReloadOptions.ReloadTabVCs]])
     }
     
-//    @IBAction func clearDataAction(_ sender: UIBarButtonItem) {
-//        EventsData.instance.events = [Event("Sample Event")]
-//        Disk.saveData()
-//        NotificationCenter.default.post(name: .ReloadTabViewController, object: self, userInfo: [EventVC.ReloadOptionsKey: [ReloadOptions.ReloadTabVCs]])
-//    }
-    
     override func viewDidLoad() {
-//        // TESTCODE
-//        eventID = 0
-        
+      
         tableView.reloadData()
         
         navBarTitleItem = navBar.topItem
-        navBarTitleItem?.title = eventTitle
+        navBarTitleItem?.title = eventsInstance.getEventTitle(for: eventID)
         
         navBar.barTintColor = UIColor.lightGray
         navBar.shadowImage = UIImage()
@@ -163,7 +134,7 @@ extension EventVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            contacts.remove(at: indexPath.row)
+            let _ = eventsInstance.removeContact(forEvent: eventID, at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
             Disk.saveData()

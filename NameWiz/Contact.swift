@@ -41,10 +41,7 @@ class Contact: NSObject, NSCoding {
     var birthday: Date?
     var notes: String = ""
     
-    init(_ firstName: String) {
-        self.firstName = firstName
-    }
-    init(_ firstName: String, _ lastName: String) {
+    init(_ firstName: String, _ lastName: String = "") {
         self.firstName = firstName
         self.lastName = lastName
     }

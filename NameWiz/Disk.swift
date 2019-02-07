@@ -116,6 +116,6 @@ public class Disk {
     }
     
     static func saveData() {
-        store(EventsData.instance.events, to: .documents, as: Constants.FileNames.EventsData)
+        store(EventsData.instance.getAllEvents(), to: .documents, as: Constants.FileNames.EventsData)
     }
 }

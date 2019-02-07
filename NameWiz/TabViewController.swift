@@ -15,6 +15,8 @@ class TabViewController: TabmanViewController {
     private var viewControllers: [EventVC] = [EventVC]()
     var initialPage: Int?
     
+    private let eventsInstance = EventsData.instance
+    
     override func viewDidLoad() {
         self.isScrollEnabled = false
         
@@ -40,27 +42,13 @@ class TabViewController: TabmanViewController {
         
         loadEventVCs()
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(reloadTabVC(_:)), name: .ReloadTabViewController, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(goToNewEvent), name: .AddNewEvent, object: nil)
-        
         super.viewDidLoad()
         
     }
     
-    override func viewDidLayoutSubviews() {
-        goToInitialPage()
-    }
-    
-    func goToInitialPage() {
-        if initialPage != nil {
-            scrollToPage(.at(index: initialPage!), animated: false)
-            initialPage = nil
-        }
-    }
-    
     func loadEventVCs() {
         viewControllers = [EventVC]()
-        for (index,event) in EventsData.instance.events.enumerated() {
+        for index in 0..<eventsInstance.eventsCount {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let eventVC = storyboard.instantiateViewController(withIdentifier: "Event") as! EventVC
             
@@ -70,31 +58,7 @@ class TabViewController: TabmanViewController {
         }
         reloadData()
     }
-    
-//    @objc func reloadTabVC (_ notification: Notification) {
-//        if let reloadOptions = notification.userInfo?[EventVC.ReloadOptionsKey] as? [EventVC.ReloadOptions]{
-//            if reloadOptions.contains(EventVC.ReloadOptions.ReloadTabButtons) {
-//                reloadData()
-//            }
-//            if reloadOptions.contains(EventVC.ReloadOptions.ReloadTabVCs) {
-//                loadEventVCs()
-//            }
-//            if reloadOptions.contains(EventVC.ReloadOptions.GotoLastVC) {
-//                scrollToPage(.last, animated: false)
-//            }
-//        }
-//
-//    }
-    
-//    @objc func goToNewEvent() {
-//        loadEventVCs()
-//        reloadData()
-//        scrollToPage(.last, animated: true)
-//    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+
 }
 
 
@@ -114,14 +78,9 @@ extension TabViewController: PageboyViewControllerDataSource, TMBarDataSource {
     }
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return nil
+        return PageboyViewController.Page.at(index: initialPage ?? 0)
     }
     
     
 
 }
-
-//extension Notification.Name {
-//    static let ReloadTabViewController = Notification.Name("reloadTabViewController")
-//    static let AddNewEvent = Notification.Name("addNewEvent")
-//}
