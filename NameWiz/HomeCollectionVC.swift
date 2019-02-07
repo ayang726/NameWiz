@@ -79,6 +79,7 @@ class HomeCollectionVC: UIViewController {
         deleteButton.layer.cornerRadius = 5
         
 //        collectionViewLongPressOutlet.minimumPressDuration = 1.2
+        
     }
     
 
@@ -115,9 +116,19 @@ extension HomeCollectionVC {
         if segue.identifier == Constants.Identifiers.GoToEvents {
             if let destination = segue.destination as? TabViewController, let indexPath = sender as? IndexPath {
                 destination.initialPage = indexPath.row
+                destination.transitioningDelegate = self
             }
         }
     }
 }
 
 
+
+// Transitioning
+extension HomeCollectionVC: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let animator = CustomAnimator()
+        return animator
+    }
+}

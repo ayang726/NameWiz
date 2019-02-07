@@ -18,6 +18,7 @@
 		0887A0EB2207FFCC003B9C5C /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887A0EA2207FFCC003B9C5C /* Contants.swift */; };
 		0887A0ED22080633003B9C5C /* Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887A0EC22080633003B9C5C /* Disk.swift */; };
 		08C75F3722052AB300E45473 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C75F3622052AB300E45473 /* TabViewController.swift */; };
+		08D6D8AE220BB65B00F69E2E /* CustomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6D8AD220BB65B00F69E2E /* CustomAnimator.swift */; };
 		08DFA7F72205F09C00F9AE47 /* EventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DFA7F62205F09C00F9AE47 /* EventVC.swift */; };
 		08DFA7F92205F10000F9AE47 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DFA7F82205F10000F9AE47 /* Contact.swift */; };
 		08DFA7FB2205FFCE00F9AE47 /* EventsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DFA7FA2205FFCE00F9AE47 /* EventsData.swift */; };
@@ -38,6 +39,7 @@
 		0887A0EA2207FFCC003B9C5C /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		0887A0EC22080633003B9C5C /* Disk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disk.swift; sourceTree = "<group>"; };
 		08C75F3622052AB300E45473 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		08D6D8AD220BB65B00F69E2E /* CustomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimator.swift; sourceTree = "<group>"; };
 		08DFA7F62205F09C00F9AE47 /* EventVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventVC.swift; sourceTree = "<group>"; };
 		08DFA7F82205F10000F9AE47 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		08DFA7FA2205FFCE00F9AE47 /* EventsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsData.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				0858D13B220A8CC7009CC555 /* HomeCollectionViewCell.swift */,
+				08D6D8AD220BB65B00F69E2E /* CustomAnimator.swift */,
 				0858D137220A4B21009CC555 /* HomeCollectionVC.swift */,
 				08C75F3622052AB300E45473 /* TabViewController.swift */,
 				08DFA7F62205F09C00F9AE47 /* EventVC.swift */,
@@ -257,6 +260,7 @@
 			files = (
 				0887A0ED22080633003B9C5C /* Disk.swift in Sources */,
 				0858D138220A4B21009CC555 /* HomeCollectionVC.swift in Sources */,
+				08D6D8AE220BB65B00F69E2E /* CustomAnimator.swift in Sources */,
 				08DFA7F92205F10000F9AE47 /* Contact.swift in Sources */,
 				08DFA7FB2205FFCE00F9AE47 /* EventsData.swift in Sources */,
 				08DFA7F72205F09C00F9AE47 /* EventVC.swift in Sources */,
