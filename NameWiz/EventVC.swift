@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Tabman
 
 class EventVC: UIViewController {
 
@@ -27,6 +28,8 @@ class EventVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tapOutlet: UITapGestureRecognizer!
+    
     @IBAction func tapAction(_ sender: UITapGestureRecognizer) {
         if textfield.isEditing {
             self.view.endEditing(true)
@@ -35,6 +38,7 @@ class EventVC: UIViewController {
             titleTextField.resignFirstResponder()
             navBar.popItem(animated: true)
         }
+        view.removeGestureRecognizer(tapOutlet)
     }
     
     private var titleTextField = UITextField()
@@ -90,7 +94,7 @@ class EventVC: UIViewController {
     
     override func viewDidLoad() {
       
-        tableView.reloadData()
+        super.viewDidLoad()
         
         navBarTitleItem = navBar.topItem
         navBarTitleItem?.title = eventsInstance.getEventTitle(for: eventID)
@@ -99,13 +103,16 @@ class EventVC: UIViewController {
         navBar.shadowImage = UIImage()
         navBar.setBackgroundImage(UIImage(), for: .default)
         
-        
         tableView.delegate = self
+        tableView.dataSource = self
+        
         textfield.delegate = self
         
-        super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
 
 }
 
@@ -118,8 +125,8 @@ extension EventVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Identifiers.ContactCellIdentifier, for: indexPath)
+//        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         var fullName: String
         fullName = contacts[indexPath.row].firstName
         
@@ -138,6 +145,17 @@ extension EventVC: UITableViewDataSource, UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
             
             Disk.saveData()
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: Constants.Identifiers.GoToDetails, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.Identifiers.GoToDetails, let destination = segue.destination as? ContactDetailsVC, let index = tableView.indexPathForSelectedRow?.row {
+            destination.contact = contacts[index]
         }
     }
     
@@ -166,5 +184,9 @@ extension EventVC: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        view.addGestureRecognizer(tapOutlet)
     }
 }

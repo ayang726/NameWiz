@@ -12,12 +12,13 @@ import Pageboy
 class TabViewController: TabmanViewController {
 
     
-    private var viewControllers: [EventVC] = [EventVC]()
+    var viewControllers: [EventVC] = [EventVC]()
     var initialPage: Int?
     
     private let eventsInstance = EventsData.instance
     
     override func viewDidLoad() {
+        
         self.isScrollEnabled = false
         
         self.dataSource = self
@@ -64,7 +65,7 @@ class TabViewController: TabmanViewController {
 
 extension TabViewController: PageboyViewControllerDataSource, TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
-        let title = viewControllers[index].eventTitle
+        let title = eventsInstance.getEventTitle(for: index)
         return TMBarItem(title: title)
     }
     
@@ -74,6 +75,7 @@ extension TabViewController: PageboyViewControllerDataSource, TMBarDataSource {
     
     func viewController(for pageboyViewController: PageboyViewController,
                         at index: PageboyViewController.PageIndex) -> UIViewController? {
+        
         return viewControllers[index]
     }
     

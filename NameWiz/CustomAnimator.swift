@@ -10,7 +10,7 @@ import UIKit
 
 class CustomAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    let duration = 1.0
+    let duration = 0.5
     let checkViewDisappearDuration = 0.2
     let checkerViewCountInRow:CGFloat = 20
     let numCheckDisappearAtTheTime = 10
@@ -46,10 +46,7 @@ class CustomAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         }
 
         var indexToRemove: Int? {return checkerViews.count > 0 ? Int(arc4random_uniform(UInt32(checkerViews.count))) : nil}
-//        var viewToRemove: UIView? { return indexToRemove != nil ? checkerViews[indexToRemove!] : nil}
-//        func viewToRemove(index: Int) -> UIView {
-//            return checkerViews[index]
-//        }
+
         let number = checkerViews.count/numCheckDisappearAtTheTime
         for i in 0..<number {
             var viewsToRemove = [UIView]()

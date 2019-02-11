@@ -11,6 +11,8 @@ class Constants {
     struct Coder{
         static let FirstNameKey = "firstName"
         static let LastNameKey = "lastName"
+        static let CompanyKey = "company"
+        static let TitleKey = "title"
         static let Facts = "facts"
         static let Conversation = "conversation"
         static let PhoneNumber = "phoneNumber"
@@ -31,7 +33,8 @@ class Constants {
     
     struct Identifiers {
         static let CollectionViewIdentifier = "CollectionViewIdentifier"
-        static let EventTableViewIdentifier = "EventTableViewIdentifier"
+        static let ContactCellIdentifier = "ContactCell"
         static let GoToEvents = "GoToEvents"
+        static let GoToDetails = "GoToDetails"
     }
 }

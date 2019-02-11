@@ -12,6 +12,8 @@ class Contact: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(firstName, forKey: Constants.Coder.FirstNameKey)
         aCoder.encode(lastName, forKey: Constants.Coder.LastNameKey)
+        aCoder.encode(company, forKey: Constants.Coder.CompanyKey)
+        aCoder.encode(title, forKey: Constants.Coder.TitleKey)
         aCoder.encode(facts, forKey: Constants.Coder.Facts)
         aCoder.encode(conversation, forKey: Constants.Coder.Conversation)
         aCoder.encode(phoneNumber, forKey: Constants.Coder.PhoneNumber)
@@ -23,22 +25,26 @@ class Contact: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         firstName = aDecoder.decodeObject(forKey: Constants.Coder.FirstNameKey) as! String
         lastName = aDecoder.decodeObject(forKey: Constants.Coder.LastNameKey) as! String
+        company = aDecoder.decodeObject(forKey: Constants.Coder.CompanyKey) as? String ?? ""
+        title = aDecoder.decodeObject(forKey: Constants.Coder.TitleKey) as? String ?? ""
         facts = aDecoder.decodeObject(forKey: Constants.Coder.Facts) as! String
         conversation = aDecoder.decodeObject(forKey: Constants.Coder.Conversation) as! String
         phoneNumber = aDecoder.decodeObject(forKey: Constants.Coder.PhoneNumber) as! String
         email = aDecoder.decodeObject(forKey: Constants.Coder.Email) as! String
-        birthday = aDecoder.decodeObject(forKey: Constants.Coder.Birthday) as? Date
+        birthday = aDecoder.decodeObject(forKey: Constants.Coder.Birthday) as? String ?? ""
         notes = aDecoder.decodeObject(forKey: Constants.Coder.Notes) as! String
     }
     
     
     var firstName: String
     var lastName: String = ""
+    var company: String = ""
+    var title: String = ""
     var facts: String = ""
     var conversation: String = ""
     var phoneNumber: String = ""
     var email: String = ""
-    var birthday: Date?
+    var birthday: String = ""
     var notes: String = ""
     
     init(_ firstName: String, _ lastName: String = "") {

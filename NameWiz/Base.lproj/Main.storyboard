@@ -190,7 +190,7 @@
                                 <rect key="frame" x="0.0" y="163" width="375" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lLp-Sl-J80">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactCell" id="lLp-Sl-J80">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lLp-Sl-J80" id="y3I-Rl-Vf0">
@@ -244,14 +244,13 @@
                             <constraint firstItem="V4i-H6-wY2" firstAttribute="centerX" secondItem="YPf-Px-XL3" secondAttribute="centerX" id="rqh-OW-XFY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YPf-Px-XL3"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="OCa-fi-zs5" appends="YES" id="TWx-J4-Ui6"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="navBar" destination="G8x-hb-LGs" id="8bf-Kd-8p1"/>
                         <outlet property="tableView" destination="cMB-vV-Bry" id="XcE-De-rDK"/>
+                        <outlet property="tapOutlet" destination="OCa-fi-zs5" id="sza-cK-nt7"/>
                         <outlet property="textfield" destination="V4i-H6-wY2" id="WD0-Nt-xg3"/>
+                        <segue destination="9sY-St-CVj" kind="show" identifier="GoToDetails" id="kbF-Sk-PqX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ipn-Th-aVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -267,6 +266,373 @@
                 </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="410.39999999999998" y="-388.15592203898052"/>
+        </scene>
+        <!--Contact DetailsVC-->
+        <scene sceneID="IOI-FZ-a0d">
+            <objects>
+                <viewController id="9sY-St-CVj" customClass="ContactDetailsVC" customModule="NameWiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zKK-j6-yZE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s4O-aE-edo">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="25"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="PERSON" id="gCE-fM-g09">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="46q-eP-RRY">
+                                            <color key="tintColor" red="0.078431372550000003" green="0.62745098040000002" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <connections>
+                                                <action selector="navBarDoneAction:" destination="9sY-St-CVj" id="Sw3-y4-Y39"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="kab-ov-uhS">
+                                            <color key="tintColor" red="0.078431372550000003" green="0.62745098040000002" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <connections>
+                                                <action selector="saveBarSaveAction:" destination="9sY-St-CVj" id="1Pa-1R-QN0"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msq-Sg-Vrd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GuD-JU-iMd">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="OkO-dx-OFV">
+                                                <rect key="frame" x="60" y="26" width="255" height="135"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9wo-mZ-Viw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="135"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJX-7y-IrL">
+                                                                <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="E0M-JY-2py"/>
+                                                                    <constraint firstAttribute="width" constant="90" id="ljI-6Z-tl9"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULP-7w-3qf">
+                                                                <rect key="frame" x="0.0" y="35" width="90" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="YOC-3k-M0F"/>
+                                                                    <constraint firstAttribute="width" constant="90" id="mZN-p6-p2g"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgR-uh-apR">
+                                                                <rect key="frame" x="0.0" y="70" width="90" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="90" id="WrR-kq-mVQ"/>
+                                                                    <constraint firstAttribute="height" constant="30" id="e0b-jz-zV7"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8JP-A0-H7e">
+                                                                <rect key="frame" x="0.0" y="105" width="90" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="90" id="9O5-mQ-8mf"/>
+                                                                    <constraint firstAttribute="height" constant="30" id="bK6-Cl-Hkp"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="f8J-tt-4EE">
+                                                        <rect key="frame" x="105" y="0.0" width="150" height="135"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Required" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vgx-b8-M0Z">
+                                                                <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="tPS-PH-vK8"/>
+                                                                </constraints>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="given-name"/>
+                                                            </textField>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="OJe-gY-Pa7">
+                                                                <rect key="frame" x="0.0" y="35" width="150" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="vir-Vh-1WK"/>
+                                                                </constraints>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="family-name"/>
+                                                            </textField>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="eWk-pv-HQv">
+                                                                <rect key="frame" x="0.0" y="70" width="150" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="apf-Dm-Mip"/>
+                                                                </constraints>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="organization"/>
+                                                            </textField>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="RoB-3m-GAN">
+                                                                <rect key="frame" x="0.0" y="105" width="150" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="4uw-Re-o4R"/>
+                                                                </constraints>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="organization-title"/>
+                                                            </textField>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="eWk-pv-HQv" firstAttribute="height" secondItem="RoB-3m-GAN" secondAttribute="height" id="UTs-J4-eRo"/>
+                                                            <constraint firstItem="OJe-gY-Pa7" firstAttribute="height" secondItem="eWk-pv-HQv" secondAttribute="height" id="dwk-6c-tUg"/>
+                                                            <constraint firstItem="Vgx-b8-M0Z" firstAttribute="height" secondItem="OJe-gY-Pa7" secondAttribute="height" id="wCw-UN-MFt"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="135" id="6Qz-za-RxD"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="TsZ-z5-tAn">
+                                                <rect key="frame" x="60" y="376" width="255" height="100"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3r4-fY-8HV">
+                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="100"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone #:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Rl-PA-WTd">
+                                                                <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="2z5-Jo-uXe"/>
+                                                                    <constraint firstAttribute="width" constant="90" id="Lrd-So-l9D"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBF-tM-BN9">
+                                                                <rect key="frame" x="0.0" y="35" width="90" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="eQd-R3-6MN"/>
+                                                                    <constraint firstAttribute="width" constant="90" id="j0U-et-5ID"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PkM-DS-B51">
+                                                                <rect key="frame" x="0.0" y="70" width="90" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="JsS-gm-p5M"/>
+                                                                    <constraint firstAttribute="width" constant="90" id="aSz-1e-X8G"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YGy-EV-yzL">
+                                                        <rect key="frame" x="105" y="0.0" width="150" height="100"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="4v9-ds-fb6">
+                                                                <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="zuM-vT-VwH"/>
+                                                                </constraints>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next" smartDashesType="yes" textContentType="tel"/>
+                                                            </textField>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="nzf-Kd-fgc">
+                                                                <rect key="frame" x="0.0" y="35" width="150" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="lO9-Mi-Hda"/>
+                                                                </constraints>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
+                                                            </textField>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="10" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="N1a-yb-etH">
+                                                                <rect key="frame" x="0.0" y="70" width="150" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="xuc-60-HXI"/>
+                                                                </constraints>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="nzf-Kd-fgc" firstAttribute="height" secondItem="N1a-yb-etH" secondAttribute="height" id="d6k-wH-Yxf"/>
+                                                            <constraint firstItem="4v9-ds-fb6" firstAttribute="height" secondItem="nzf-Kd-fgc" secondAttribute="height" id="ysC-YL-72C"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="cFQ-Ra-tKU"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nnD-hx-kR1">
+                                                <rect key="frame" x="37.5" y="271" width="300" height="100"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PERSON said:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="6Sw-TC-rSF">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="27.5"/>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Trump is doing OK..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vvM-Vh-e7e">
+                                                        <rect key="frame" x="0.0" y="27.5" width="300" height="72.5"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="72.5" id="QLE-v7-s1R"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="A8h-en-kjJ"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="n7B-ZN-Bgy">
+                                                <rect key="frame" x="37.5" y="166" width="300" height="100"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Things to remember about PERSON:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="GqB-za-LmW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="27.5"/>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Wears a top hat" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cDe-qV-0Sw">
+                                                        <rect key="frame" x="0.0" y="27.5" width="300" height="72.5"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="72.5" id="Yfp-47-1Qn"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="BYR-3Q-lKQ"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZSu-WH-Srq">
+                                                <rect key="frame" x="37.5" y="484" width="300" height="100"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Additional Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="7ZM-vL-CuJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="27.5"/>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Karen's Friend" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uQG-TR-DuZ">
+                                                        <rect key="frame" x="0.0" y="27.5" width="300" height="72.5"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="72.5" id="Ug8-UG-jP9"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="9yg-eT-5Kb"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="nnD-hx-kR1" firstAttribute="centerX" secondItem="GuD-JU-iMd" secondAttribute="centerX" id="Efc-QU-hCK"/>
+                                            <constraint firstItem="n7B-ZN-Bgy" firstAttribute="top" secondItem="OkO-dx-OFV" secondAttribute="bottom" constant="5" id="Euj-uO-1sS"/>
+                                            <constraint firstItem="nnD-hx-kR1" firstAttribute="top" secondItem="n7B-ZN-Bgy" secondAttribute="bottom" constant="5" id="KR8-gc-mq4"/>
+                                            <constraint firstItem="ZSu-WH-Srq" firstAttribute="top" secondItem="TsZ-z5-tAn" secondAttribute="bottom" constant="8" id="Mnx-Ir-6nj"/>
+                                            <constraint firstItem="ZSu-WH-Srq" firstAttribute="width" secondItem="n7B-ZN-Bgy" secondAttribute="width" id="QVZ-TC-OpN"/>
+                                            <constraint firstItem="nnD-hx-kR1" firstAttribute="width" secondItem="n7B-ZN-Bgy" secondAttribute="width" id="SgH-46-3cz"/>
+                                            <constraint firstItem="OkO-dx-OFV" firstAttribute="centerX" secondItem="GuD-JU-iMd" secondAttribute="centerX" id="XdM-Wn-0O7"/>
+                                            <constraint firstItem="n7B-ZN-Bgy" firstAttribute="centerX" secondItem="GuD-JU-iMd" secondAttribute="centerX" id="bQJ-Xw-bMz"/>
+                                            <constraint firstItem="TsZ-z5-tAn" firstAttribute="centerX" secondItem="GuD-JU-iMd" secondAttribute="centerX" id="jVl-BN-uxo"/>
+                                            <constraint firstItem="OkO-dx-OFV" firstAttribute="top" secondItem="GuD-JU-iMd" secondAttribute="top" constant="26" id="onh-YN-YSo"/>
+                                            <constraint firstItem="TsZ-z5-tAn" firstAttribute="top" secondItem="nnD-hx-kR1" secondAttribute="bottom" constant="5" id="pfP-u3-KAR"/>
+                                            <constraint firstItem="ZSu-WH-Srq" firstAttribute="centerX" secondItem="GuD-JU-iMd" secondAttribute="centerX" id="voe-8R-BYU"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="GuD-JU-iMd" firstAttribute="height" secondItem="msq-Sg-Vrd" secondAttribute="height" id="7Ng-CN-8lJ"/>
+                                    <constraint firstItem="GuD-JU-iMd" firstAttribute="leading" secondItem="msq-Sg-Vrd" secondAttribute="leading" id="8Hh-fB-buP"/>
+                                    <constraint firstAttribute="trailing" secondItem="GuD-JU-iMd" secondAttribute="trailing" id="A8d-in-iY7"/>
+                                    <constraint firstAttribute="bottom" secondItem="GuD-JU-iMd" secondAttribute="bottom" id="BA0-D7-8K2"/>
+                                    <constraint firstItem="GuD-JU-iMd" firstAttribute="top" secondItem="msq-Sg-Vrd" secondAttribute="top" id="HV4-Mm-MTe"/>
+                                    <constraint firstItem="GuD-JU-iMd" firstAttribute="width" secondItem="msq-Sg-Vrd" secondAttribute="width" id="bAg-Tq-4z8"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="9sY-St-CVj" id="2Hz-Ot-9Nw"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="msq-Sg-Vrd" firstAttribute="leading" secondItem="nBc-m8-jHf" secondAttribute="leading" id="2uZ-Cn-fes"/>
+                            <constraint firstItem="msq-Sg-Vrd" firstAttribute="bottom" secondItem="nBc-m8-jHf" secondAttribute="bottom" id="6ap-eF-VQN"/>
+                            <constraint firstItem="s4O-aE-edo" firstAttribute="top" secondItem="nBc-m8-jHf" secondAttribute="top" id="AQu-5X-E0K"/>
+                            <constraint firstItem="n7B-ZN-Bgy" firstAttribute="width" secondItem="nBc-m8-jHf" secondAttribute="width" multiplier="0.8" id="HlG-Mg-Yx8"/>
+                            <constraint firstItem="msq-Sg-Vrd" firstAttribute="top" secondItem="s4O-aE-edo" secondAttribute="bottom" id="PsL-Mb-Vjk"/>
+                            <constraint firstItem="s4O-aE-edo" firstAttribute="centerX" secondItem="nBc-m8-jHf" secondAttribute="centerX" id="gs0-fa-x29"/>
+                            <constraint firstItem="msq-Sg-Vrd" firstAttribute="trailing" secondItem="nBc-m8-jHf" secondAttribute="trailing" id="jSH-dt-RWE"/>
+                            <constraint firstItem="s4O-aE-edo" firstAttribute="width" secondItem="zKK-j6-yZE" secondAttribute="width" id="tP6-Cl-QrG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nBc-m8-jHf"/>
+                    </view>
+                    <connections>
+                        <outlet property="ConversationTextViewOutlet" destination="vvM-Vh-e7e" id="0Uf-yz-aDr"/>
+                        <outlet property="birthdayTextFieldOutlet" destination="N1a-yb-etH" id="hd5-cD-1uH"/>
+                        <outlet property="companyTextFieldOutlet" destination="eWk-pv-HQv" id="rDi-FJ-6OX"/>
+                        <outlet property="conversationLabel" destination="6Sw-TC-rSF" id="kCf-nN-qOA"/>
+                        <outlet property="emailTextFieldOutlet" destination="nzf-Kd-fgc" id="PmK-iw-sUS"/>
+                        <outlet property="firstNameTextFieldOutlet" destination="Vgx-b8-M0Z" id="gpw-z9-9dO"/>
+                        <outlet property="lastNameTextFieldOutlet" destination="OJe-gY-Pa7" id="eWE-PP-WFg"/>
+                        <outlet property="navBar" destination="s4O-aE-edo" id="Oy3-Rj-YhE"/>
+                        <outlet property="notesTextViewOutlet" destination="uQG-TR-DuZ" id="mp8-Ib-KmU"/>
+                        <outlet property="phoneNumberTextFieldOutlet" destination="4v9-ds-fb6" id="uom-2c-HHA"/>
+                        <outlet property="scrollView" destination="msq-Sg-Vrd" id="grF-nE-j2l"/>
+                        <outlet property="tapOutlet" destination="ODJ-t4-Dds" id="mcR-IU-H2z"/>
+                        <outlet property="thingsToRememberLabel" destination="GqB-za-LmW" id="oAo-g4-eWS"/>
+                        <outlet property="thingsToRememberTextViewOutlet" destination="cDe-qV-0Sw" id="Gsy-ha-WrE"/>
+                        <outlet property="titleTextFieldOutlet" destination="RoB-3m-GAN" id="fpw-Va-Lib"/>
+                        <outletCollection property="textFieldOutletCollection" destination="RoB-3m-GAN" collectionClass="NSMutableArray" id="eso-fs-Ba7"/>
+                        <outletCollection property="textViewOutletCollection" destination="cDe-qV-0Sw" collectionClass="NSMutableArray" id="UoY-lr-Fdq"/>
+                        <outletCollection property="textViewOutletCollection" destination="vvM-Vh-e7e" collectionClass="NSMutableArray" id="xke-Rr-14f"/>
+                        <outletCollection property="textFieldOutletCollection" destination="4v9-ds-fb6" collectionClass="NSMutableArray" id="obe-DA-Zpv"/>
+                        <outletCollection property="textViewOutletCollection" destination="uQG-TR-DuZ" collectionClass="NSMutableArray" id="uyc-RO-HTR"/>
+                        <outletCollection property="textFieldOutletCollection" destination="Vgx-b8-M0Z" collectionClass="NSMutableArray" id="6uq-my-2Jd"/>
+                        <outletCollection property="textFieldOutletCollection" destination="OJe-gY-Pa7" collectionClass="NSMutableArray" id="2UD-gd-6yu"/>
+                        <outletCollection property="textFieldOutletCollection" destination="eWk-pv-HQv" collectionClass="NSMutableArray" id="0KO-ZT-6tD"/>
+                        <outletCollection property="textFieldOutletCollection" destination="nzf-Kd-fgc" collectionClass="NSMutableArray" id="2oU-2p-adj"/>
+                        <outletCollection property="textFieldOutletCollection" destination="N1a-yb-etH" collectionClass="NSMutableArray" id="Oz5-aS-ZZv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pBe-lV-08E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ODJ-t4-Dds">
+                    <connections>
+                        <action selector="tapAction:" destination="9sY-St-CVj" id="hPM-rz-atP"/>
+                        <outlet property="delegate" destination="9sY-St-CVj" id="dxW-0a-eYg"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1180" y="-389.05547226386807"/>
         </scene>
     </scenes>
 </document>
