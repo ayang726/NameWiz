@@ -11,6 +11,7 @@
 		0801B5CA2205010200DC5DDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0801B5C82205010200DC5DDA /* Main.storyboard */; };
 		0801B5CC2205010400DC5DDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0801B5CB2205010400DC5DDA /* Assets.xcassets */; };
 		0801B5CF2205010400DC5DDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0801B5CD2205010400DC5DDA /* LaunchScreen.storyboard */; };
+		0824161D2212793F00118359 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824161C2212793F00118359 /* ContactsTableViewCell.swift */; };
 		0858D138220A4B21009CC555 /* HomeCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858D137220A4B21009CC555 /* HomeCollectionVC.swift */; };
 		0858D13A220A51E2009CC555 /* Customisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858D139220A51E2009CC555 /* Customisation.swift */; };
 		0858D13C220A8CC7009CC555 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858D13B220A8CC7009CC555 /* HomeCollectionViewCell.swift */; };
@@ -33,6 +34,7 @@
 		0801B5CB2205010400DC5DDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0801B5CE2205010400DC5DDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0801B5D02205010400DC5DDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0824161C2212793F00118359 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		0858D137220A4B21009CC555 /* HomeCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionVC.swift; sourceTree = "<group>"; };
 		0858D139220A51E2009CC555 /* Customisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customisation.swift; sourceTree = "<group>"; };
 		0858D13B220A8CC7009CC555 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				08C75F3622052AB300E45473 /* TabViewController.swift */,
 				08DFA7F62205F09C00F9AE47 /* EventVC.swift */,
 				089D62A12210F31F0048CE00 /* ContactDetailsVC.swift */,
+				0824161C2212793F00118359 /* ContactsTableViewCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				0858D138220A4B21009CC555 /* HomeCollectionVC.swift in Sources */,
 				08D6D8AE220BB65B00F69E2E /* CustomAnimator.swift in Sources */,
 				08DFA7F92205F10000F9AE47 /* Contact.swift in Sources */,
+				0824161D2212793F00118359 /* ContactsTableViewCell.swift in Sources */,
 				08DFA7FB2205FFCE00F9AE47 /* EventsData.swift in Sources */,
 				08DFA7F72205F09C00F9AE47 /* EventVC.swift in Sources */,
 				0858D13A220A51E2009CC555 /* Customisation.swift in Sources */,

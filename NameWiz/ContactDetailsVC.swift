@@ -22,6 +22,9 @@ class ContactDetailsVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollViewContentView: UIView!
+    var scrollViewOriginalHeight: CGFloat!
+    
     
     @IBOutlet weak var firstNameTextFieldOutlet: UITextField!
     @IBOutlet weak var lastNameTextFieldOutlet: UITextField!
@@ -86,6 +89,8 @@ class ContactDetailsVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewDidLoad() {
+        scrollViewOriginalHeight = scrollView.frame.height
+
         super.viewDidLoad()
         firstNameTextFieldOutlet.delegate = self
         lastNameTextFieldOutlet.delegate = self
@@ -102,11 +107,31 @@ class ContactDetailsVC: UIViewController, UIGestureRecognizerDelegate {
         
         dateFormatter.dateFormat = "MMM dd, yyyy"
         
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//
     }
     
     override func viewWillAppear(_ animated: Bool) {
         updateUI()
     }
+//
+//    @objc func keyboardWillShow(_ notification: Notification) {
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect)?.size {
+//            if scrollView.frame.height
+//                == scrollViewOriginalHeight{
+//                scrollView.frame.size.height -= keyboardSize.height
+//            }
+//        }
+//
+//    }
+//    
+//    @objc func keyboardWillHide(_ notification: Notification) {
+//        if scrollView.frame.height
+//            != scrollViewOriginalHeight{
+//            scrollView.frame.size.height = scrollViewOriginalHeight
+//        }
+//    }
     
     func updateUI() {
         updateDynamicLabels(firstName: contact.firstName)
@@ -182,8 +207,9 @@ extension ContactDetailsVC: UITextFieldDelegate, UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         view.addGestureRecognizer(tapOutlet)
     }
-    
+
     func textViewDidEndEditing(_ textView: UITextView) {
+        
         switch textView {
         case thingsToRememberTextViewOutlet:
             contact.facts = thingsToRememberTextViewOutlet.text ?? ""
@@ -201,6 +227,7 @@ extension ContactDetailsVC: UITextFieldDelegate, UITextViewDelegate {
 
 extension ContactDetailsVC: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        print("dragging")
     }
+    
+    
 }

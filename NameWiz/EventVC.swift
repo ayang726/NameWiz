@@ -27,6 +27,7 @@ class EventVC: UIViewController {
     @IBOutlet weak var navBarLongPressOutlet: UILongPressGestureRecognizer!
     
     @IBOutlet weak var tableView: UITableView!
+    var tableViewOriginalY: CGFloat!
     
     @IBOutlet weak var tapOutlet: UITapGestureRecognizer!
     
@@ -93,7 +94,7 @@ class EventVC: UIViewController {
     }
     
     override func viewDidLoad() {
-      
+        tableViewOriginalY = tableView.frame.origin.y
         super.viewDidLoad()
         
         navBarTitleItem = navBar.topItem
@@ -108,12 +109,31 @@ class EventVC: UIViewController {
         
         textfield.delegate = self
         
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
 
+//    @objc func keyboardWillShow(_ notification: Notification) {
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect)?.size {
+//            if tableView.frame.origin.y
+//                == tableViewOriginalY{
+//                tableView.frame.origin.y -= keyboardSize.height
+//            }
+//        }
+//
+//    }
+//
+//    @objc func keyboardWillHide(_ notification: Notification) {
+//        if tableView.frame.origin.y
+//            != tableViewOriginalY{
+//            tableView.frame.origin.y = tableViewOriginalY
+//        }
+//    }
 }
 
 extension EventVC: UITableViewDataSource, UITableViewDelegate {
@@ -125,18 +145,52 @@ extension EventVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Identifiers.ContactCellIdentifier, for: indexPath)
-//        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Identifiers.ContactCellIdentifier, for: indexPath) as! ContactsTableViewCell
+        
+        let contact = contacts[indexPath.row]
+        
+        // parse primary info: Name (Title, Company)
         var fullName: String
-        fullName = contacts[indexPath.row].firstName
+        fullName = contact.firstName
         
-        if (contacts[indexPath.row].lastName != "") {
-          fullName += " \(contacts[indexPath.row].lastName)"
+        if (contact.lastName != "") {
+          fullName += " \(contact.lastName)"
         }
-        cell.textLabel?.text = fullName
-        cell.textLabel?.font = Customisation.Font.NoteWorthy
         
+        let title = contact.title
+        let company = contact.company
+        
+        var primaryInfo = fullName
+        if title != "" && company != ""{
+            primaryInfo += " (\(title), \(company))"
+            
+        } else if title == "" && company == "" {
+            primaryInfo += ""
+        } else {
+            primaryInfo += "(\(title + company))"
+        }
+        
+        // Parse secondary info: things to remember | conversation | notes
+        let facts = contact.facts
+        let conversation = contact.conversation
+        let notes = contact.notes
+        
+        var secondaryInfo = facts
+        if conversation != "" {
+            secondaryInfo += " | \(conversation)"
+        }
+        if notes != "" {
+            secondaryInfo += " | \(notes)"
+        }
+        
+        cell.primaryInfoLable.text = primaryInfo
+        cell.secondaryInfoLabel.text = secondaryInfo
+
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -147,7 +201,6 @@ extension EventVC: UITableViewDataSource, UITableViewDelegate {
             Disk.saveData()
         }
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: Constants.Identifiers.GoToDetails, sender: self)
